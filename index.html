@@ -1,1 +1,370 @@
-hello world
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlackBox – QA & Compliance for Robotics Data</title>
+  <meta name="description" content="BlackBox is the QA and compliance backbone for robotics datasets. Audit quality, track lineage, and be regulation‑ready from day one." />
+  <meta name="keywords" content="robotics, data quality, dataset QA, compliance, AI compliance, model lineage, robotics ML" />
+  <meta property="og:title" content="BlackBox – QA & Compliance for Robotics Data" />
+  <meta property="og:description" content="Audit datasets, track lineage, and stay compliant. Be the first to bring order to robotics data." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://get-blackbox.com" />
+  <meta name="theme-color" content="#0b0f1a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b0f1a'/%3E%3Cpath d='M14 14h36v36H14z' fill='%2311172a'/%3E%3Cpath d='M20 20h24v24H20z' fill='%2356ccf2' opacity='.15'/%3E%3Cpath d='M22 22h20v20H22z' fill='%23a66bff' opacity='.2'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --bg-2: #0e1323;
+      --card: #0f162a;
+      --text: #e6f1ff;
+      --muted: #9fb3c8;
+      --brand: #7c4dff; /* neon purple */
+      --brand-2: #56ccf2; /* cyan */
+      --accent: #14f195; /* mint */
+      --ring: 0 0 0 .35rem rgba(124,77,255,.25);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(124,77,255,.15), transparent 60%),
+                  radial-gradient(900px 600px at 110% 10%, rgba(86,204,242,.12), transparent 55%),
+                  linear-gradient(180deg, #0b0f1a 0%, #0a0e19 100%);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--brand-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { width: min(1200px, 92vw); margin: 0 auto; }
+
+    /* --- Hero --- */
+    header.hero {
+      position: relative;
+      padding: clamp(64px, 12vh, 120px) 0 48px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .hero-grid {
+      display: grid; gap: 32px; align-items: center;
+      grid-template-columns: 1.1fr .9fr;
+    }
+    @media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; } }
+
+    .badge { display:inline-flex; align-items:center; gap:8px; font-size:.9rem; color: var(--muted); background: rgba(124,77,255,.12); padding: 6px 10px; border: 1px solid rgba(124,77,255,.25); border-radius: 999px; }
+    .badge .dot { width:8px; height:8px; border-radius:50%; background: var(--accent); box-shadow: 0 0 .75rem var(--accent); }
+
+    h1 { font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 1.08; margin: 10px 0 16px; letter-spacing: -.015em; }
+    .lead { font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: var(--muted); margin-bottom: 28px; }
+
+    .cta-row { display:flex; flex-wrap:wrap; gap: 14px; align-items:center; }
+    .btn { appearance:none; border:0; cursor:pointer; padding: 14px 18px; border-radius: 12px; font-weight: 650; letter-spacing:.01em; background: var(--brand); color:white; box-shadow: 0 8px 30px rgba(124,77,255,.35), inset 0 -2px 0 rgba(255,255,255,.08); transition: transform .12s ease, box-shadow .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 12px 36px rgba(124,77,255,.45), inset 0 -2px 0 rgba(255,255,255,.1); }
+    .btn.secondary { background: linear-gradient(180deg, rgba(86,204,242,.15), rgba(86,204,242,.05)); color: #d5eaff; border:1px solid rgba(86,204,242,.35); box-shadow: none; }
+
+    .hero-viz { position: relative; aspect-ratio: 16/11; background: radial-gradient(120% 120% at 0% 0%, rgba(86,204,242,.12), transparent 60%), linear-gradient(180deg, rgba(17,23,42,.9), rgba(15,22,42,.6)); border: 1px solid rgba(124,77,255,.25); border-radius: 18px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(124,77,255,.08), 0 30px 60px rgba(0,0,0,.35); }
+
+    /* Abstract animation */
+    .gridlines::before, .gridlines::after { content:""; position:absolute; inset:0; background-size: 32px 32px; opacity:.18; }
+    .gridlines::before { background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); mask: radial-gradient(120% 120% at 50% 50%, black 55%, transparent 85%); }
+    .gridlines::after { background: radial-gradient(600px 380px at 70% 30%, rgba(124,77,255,.25), transparent 58%), radial-gradient(600px 420px at 30% 70%, rgba(86,204,242,.25), transparent 60%); mix-blend-mode: screen; }
+
+    .orbit {
+      position:absolute; inset:0; display:grid; place-items:center; pointer-events:none;
+      --s: 240px;
+      animation: float 9s ease-in-out infinite;
+    }
+    .orbit .ring {
+      width: var(--s); height: var(--s); border-radius: 50%; border: 1px dashed rgba(124,77,255,.35); filter: drop-shadow(0 0 12px rgba(124,77,255,.25));
+      animation: spin 22s linear infinite;
+    }
+    .node { position:absolute; width:12px; height:12px; border-radius:50%; background: var(--brand-2); box-shadow: 0 0 16px var(--brand-2); }
+    .node.n1 { top: 16%; left: 18%; }
+    .node.n2 { bottom: 20%; right: 22%; background: var(--accent); box-shadow: 0 0 16px var(--accent); }
+    .node.n3 { top: 32%; right: 16%; background: #7c4dff; box-shadow: 0 0 16px #7c4dff; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+    /* --- Section styles --- */
+    section { padding: 64px 0; }
+    .section-title { font-size: clamp(1.5rem, 2.4vw, 2.2rem); margin: 0 0 16px; }
+    .section-sub { color: var(--muted); margin: 0 0 32px; }
+
+    .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 980px) { .cards { grid-template-columns: 1fr; } }
+
+    .card { background: linear-gradient(180deg, rgba(17,23,42,.8), rgba(15,22,42,.65)); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 22px; box-shadow: 0 12px 30px rgba(0,0,0,.35), inset 0 0 0 1px rgba(124,77,255,.07); }
+    .card h3 { margin: 0 0 8px; letter-spacing: -.01em; }
+    .card p { margin: 0; color: var(--muted); }
+    .card .pill { display:inline-block; font-size:.8rem; margin-bottom: 10px; color:#d9e7ff; background: rgba(86,204,242,.15); border:1px solid rgba(86,204,242,.35); padding: 4px 8px; border-radius:999px; }
+
+    /* --- Problem/Solution split --- */
+    .split { display:grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items:start; }
+    @media (max-width: 980px) { .split { grid-template-columns: 1fr; } }
+
+    .list { margin: 16px 0 0; padding: 0; list-style:none; }
+    .list li { display:grid; grid-template-columns: 26px 1fr; gap: 10px; margin: 12px 0; }
+    .list .bullet { width: 22px; height: 22px; border-radius: 6px; display:grid; place-items:center; background: rgba(124,77,255,.18); border: 1px solid rgba(124,77,255,.35); }
+
+    /* --- Roadmap --- */
+    .roadmap { display:grid; gap: 14px; }
+    .rm-item { display:grid; grid-template-columns: 120px 1fr; gap: 14px; padding: 16px; background: linear-gradient(180deg, rgba(17,23,42,.7), rgba(15,22,42,.6)); border:1px solid rgba(255,255,255,.06); border-radius: 12px; }
+    @media (max-width: 680px){ .rm-item { grid-template-columns: 1fr; } }
+    .rm-tag { font-weight: 600; color:#cfe7ff; }
+    .rm-copy { color: var(--muted); }
+
+    /* --- Credibility --- */
+    .cred { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 980px) { .cred { grid-template-columns: 1fr; } }
+
+    .quote { padding: 18px; border-radius: 12px; background: linear-gradient(180deg, rgba(124,77,255,.15), rgba(124,77,255,.05)); border: 1px solid rgba(124,77,255,.3); }
+    .small { color: var(--muted); font-size: .95rem; }
+
+    /* --- CTA band --- */
+    .cta-band { background: linear-gradient(90deg, rgba(124,77,255,.22), rgba(86,204,242,.22)); border: 1px solid rgba(124,77,255,.35); border-left: 0; border-right: 0; padding: 36px 0; }
+
+    /* --- Footer --- */
+    footer { padding: 50px 0 70px; color: var(--muted); }
+    .fgrid { display:grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
+    @media (max-width: 880px){ .fgrid { grid-template-columns: 1fr; } }
+    .brand { font-weight: 800; letter-spacing:.02em; color: var(--text); }
+
+    /* --- Modal --- */
+    .modal-backdrop { position: fixed; inset:0; background: rgba(3,7,18,.6); display:none; place-items:center; z-index: 50; }
+    .modal { width: min(560px, 92vw); background: linear-gradient(180deg, rgba(10,14,25,.98), rgba(15,22,42,.95)); border:1px solid rgba(124,77,255,.35); border-radius: 16px; padding: 22px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+    .modal h3 { margin: 0 0 6px; }
+    .modal p { margin: 0 0 12px; color: var(--muted); }
+    .field { display:flex; gap: 10px; margin-top: 12px; }
+    input[type="email"] { flex:1; background: #0b1224; color: var(--text); border:1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 14px 12px; outline:none; }
+    input[type="email"]:focus { box-shadow: var(--ring); border-color: rgba(124,77,255,.55); }
+    .close-x { background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor:pointer; float: right; }
+    .hint { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+
+    /* Utility */
+    .center { text-align:center; }
+    .muted { color: var(--muted); }
+    .space-xxs { height: 10px; }
+    .space-xs { height: 18px; }
+    .space-s { height: 28px; }
+    .space-m { height: 42px; }
+    .space-l { height: 64px; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge" aria-label="Early access badge"><span class="dot" aria-hidden="true"></span> Pre‑MVP • Early Access</span>
+        <h1>BlackBox is the QA & Compliance backbone for robotics data.</h1>
+        <p class="lead">Audit dataset quality, track model & data lineage, and get regulation‑ready—without slowing engineering velocity.</p>
+        <div class="cta-row">
+          <button class="btn" id="open-modal">Join the Waitlist</button>
+          <a class="btn secondary" href="#vision">See how it works</a>
+        </div>
+        <div class="space-xs"></div>
+        <p class="small muted">No spam. Early partners help shape the roadmap.</p>
+      </div>
+      <div class="hero-viz gridlines" role="img" aria-label="Abstract visualization of connected sensors and compliance rings">
+        <div class="orbit"><div class="ring"></div></div>
+        <div class="node n1" title="Sensor: LiDAR"></div>
+        <div class="node n2" title="Sensor: RGB"></div>
+        <div class="node n3" title="Sensor: IMU"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="problem">
+      <div class="container split">
+        <div>
+          <h2 class="section-title">The problem</h2>
+          <p class="section-sub">Robotics teams burn time and money on bad data—only to scramble when audits arrive.</p>
+          <ul class="list">
+            <li><span class="bullet">⚠️</span><span><strong>Data collection is costly</strong> and quality varies across sensors, runs, and environments.</span></li>
+            <li><span class="bullet">⏳</span><span><strong>QA is manual</strong>, inconsistent, and rarely captured as a reusable artifact.</span></li>
+            <li><span class="bullet">📚</span><span><strong>Compliance is coming</strong>—standards are tightening for robotics & AI across the US/EU.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h2 id="vision" class="section-title">Our approach</h2>
+          <p class="section-sub">BlackBox makes quality visible, comparable, and provable.</p>
+          <div class="cards">
+            <article class="card">
+              <span class="pill">Audit</span>
+              <h3>Automatic Dataset QA</h3>
+              <p>Run sensors‑aware checks (drops, skew, coverage, corruption) and generate shareable QA reports per collection.</p>
+            </article>
+            <article class="card">
+              <span class="pill">Trace</span>
+              <h3>Lineage & Reproducibility</h3>
+              <p>Connect datasets, labels, and model artifacts with immutable links—know exactly what trained what.</p>
+            </article>
+            <article class="card">
+              <span class="pill">Comply</span>
+              <h3>Regulation‑Ready</h3>
+              <p>Capture evidence for audits by design. Export documentation aligned with emerging AI/robotics standards.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">What early partners get</h2>
+        <p class="section-sub">We’re partnering with a small number of robotics teams to co‑design BlackBox. You’ll get hands‑on attention and influence the roadmap.</p>
+        <div class="cards">
+          <article class="card">
+            <h3>Priority access</h3>
+            <p>Early feature drops, direct founder support, and a say in what ships next.</p>
+          </article>
+          <article class="card">
+            <h3>White‑glove onboarding</h3>
+            <p>Help wiring BlackBox into your existing data stack and ROS bag workflows.</p>
+          </article>
+          <article class="card">
+            <h3>Founding customer perks</h3>
+            <p>Preferential pricing and credits applied to your first production contract.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">Near‑term roadmap</h2>
+        <p class="section-sub">Focused on tangible wins for dataset QA and auditability.</p>
+        <div class="roadmap">
+          <div class="rm-item">
+            <div class="rm-tag">MVP</div>
+            <div class="rm-copy">ROS bag ingest → sensor health checks → drop/skew detection → shareable QA report.</div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-tag">Phase 2</div>
+            <div class="rm-copy">Dataset registry & lineage graph → report history → basic label QA.</div>
+          </div>
+          <div class="rm-item">
+            <div class="rm-tag">Phase 3</div>
+            <div class="rm-copy">Compliance pack exports (US/EU readiness) → cloud dashboard → team workflows.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container cred">
+        <article class="quote">
+          <strong>Built by engineers, for engineers.</strong>
+          <p class="small">Our team has shipped production robotics and ML systems. BlackBox is the tool we wished we had to trust datasets and pass audits without drama.</p>
+        </article>
+        <article class="quote">
+          <strong>Data first, compliance by design.</strong>
+          <p class="small">QA isn’t a checkbox. When you measure quality continuously, compliance docs become a by‑product—not a fire drill.</p>
+        </article>
+        <article class="quote">
+          <strong>Pre‑MVP, high‑touch.</strong>
+          <p class="small">We’re hands‑on with a few partners to nail the core workflows before scaling access.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container center">
+        <h2 class="section-title">Be first to bring order to robotics data.</h2>
+        <p class="section-sub">Join the waitlist to shape BlackBox from the ground up.</p>
+        <button class="btn" id="open-modal-2">Join the Waitlist</button>
+        <div class="space-xs"></div>
+        <p class="small muted">No pitch spam. Occasional product updates only.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container fgrid">
+      <div>
+        <div class="brand" aria-label="BlackBox brand">BlackBox</div>
+        <div class="space-xxs"></div>
+        <p class="small">The QA & compliance backbone for robotics data.</p>
+      </div>
+      <div>
+        <p class="small">
+          Contact: <a href="mailto:hello@get-blackbox.com">hello@get-blackbox.com</a><br/>
+          © <span id="y"></span> BlackBox. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Waitlist Modal (no backend required; replace with your form tool later) -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mw-title">
+      <button class="close-x" id="close-x" aria-label="Close">✕</button>
+      <h3 id="mw-title">Join the early access list</h3>
+      <p>We’ll reach out when your org is a good fit for the pilot.</p>
+      <form id="waitlist-form" autocomplete="email">
+        <div class="field">
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          <button class="btn" type="submit">Request access</button>
+        </div>
+        <div class="hint">Tip: You can wire this form to Formspree, Airtable, or a Google Form later. For now, entries save in your browser.</div>
+      </form>
+      <div id="thanks" style="display:none">
+        <p><strong>Thanks! You’re on the list.</strong></p>
+        <p class="muted">We’ll be in touch soon.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple modal + localStorage waitlist capture (replace with your backend later)
+    const modal = document.getElementById('modal');
+    const open1 = document.getElementById('open-modal');
+    const open2 = document.getElementById('open-modal-2');
+    const closeX = document.getElementById('close-x');
+    const form = document.getElementById('waitlist-form');
+    const emailInput = document.getElementById('email');
+    const thanks = document.getElementById('thanks');
+
+    const openModal = () => { modal.style.display = 'grid'; emailInput?.focus(); }
+    const closeModal = () => { modal.style.display = 'none'; }
+
+    open1?.addEventListener('click', openModal);
+    open2?.addEventListener('click', openModal);
+    closeX?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Waitlist persistence (browser‑only)
+    const STORAGE_KEY = 'blackbox_waitlist';
+    function getList(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; } }
+    function saveList(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = (emailInput.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailInput.focus();
+        emailInput.setAttribute('aria-invalid', 'true');
+        return;
+      }
+      const list = getList();
+      if (!list.includes(email)) list.push(email);
+      saveList(list);
+      form.style.display = 'none';
+      thanks.style.display = 'block';
+      setTimeout(closeModal, 1200);
+    });
+  </script>
+</body>
+</html>
